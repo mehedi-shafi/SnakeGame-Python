@@ -1,5 +1,5 @@
 #Snake Game!! Yay
-#Making seeing a tutorial
+#Made seeing a tutorial
 
 
 #game imports
