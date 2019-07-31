@@ -29,8 +29,8 @@ brown = pygame.Color (165,42,42)
 aqua = pygame.Color (0,255,255)
 
 #game variables
-snakePos = [100, 50]
-snakeBody = [[100, 50], [90, 50], [80, 50]]
+snakePos = [360, 240]
+snakeBody = [snakePos, [90, 50], [80, 50]]
 snakeSpeed = 10
 score = 0
 choice = 2
@@ -73,10 +73,10 @@ def showScore(choice) :
 
 def mainMenu() :
     global snakePos
-    snakePos = [100, 50]
+    snakePos = [360, 240]
     global snakeBody
     while len(snakeBody) > 0 : snakeBody.pop()
-    snakeBody = [[100, 50], [90, 50], [80, 50]]
+    snakeBody = [[360, 240], [350, 240], [340, 240]]
     global score
     score = 0
     global choice
@@ -150,7 +150,7 @@ while 1:
             snakePos[1] += snakeSpeed
 
         print ('Direction: ' + direction + ' changeTo: ' + changeTo)
-        print (snakeBody)
+        # print (snakeBody)
 
         #Snake body mechanism
         snakeBody.insert(0, list(snakePos))
