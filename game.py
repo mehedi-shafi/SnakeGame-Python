@@ -20,7 +20,6 @@ class Game:
         self.menu = MainMenu()
         self.spawnfood()
         self.gameloop()
-        self.renderableobjects = []
 
     def gameloop(self):
         while True:
@@ -30,9 +29,17 @@ class Game:
             self.render()
 
     def update(self):
-        self.player.update(self.food)
+        self.player.update()
+        self.eatFood()
         self.spawnfood()
         pass
+
+    def eatFood(self):
+        if self.food.posx == self.player.head_pos[0] and self.food.posy == self.player.head_pos[1]:
+            self.player.eat()
+            self.food = None
+        else:
+            self.player.body.pop()
 
     def render(self):
         self.window.fill(white)        
@@ -48,9 +55,17 @@ class Game:
             pygame.quit()
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            self.handleKeyEvent(event)
+            self.handleKeyEvent(event.key)
 
-    def handleKeyEvent(self, event):
+    def handleKeyEvent(self, keyPressed):
+        if keyPressed == pygame.K_RIGHT or keyPressed == pygame.K_d:
+            self.player.move(RIGHT)
+        if keyPressed == pygame.K_LEFT or keyPressed == pygame.K_a:
+            self.player.move(LEFT)
+        if keyPressed == pygame.K_UP or keyPressed == pygame.K_w:
+            self.player.move(UP)
+        if keyPressed == pygame.K_DOWN or keyPressed == pygame.K_s:
+            self.player.move(DOWN)
         pass
 
     def createDisplay(self):

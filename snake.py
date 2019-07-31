@@ -10,15 +10,27 @@ class Snake:
         self.GAME_OVER = False
         self.score = 0
 
-    def move(self, key):
+    def move(self, shiftTo):
+        if self.validmove(shiftTo):
+            self.direction = shiftTo
         pass
 
+    def validmove(self, shiftTo):
+        if self.direction == LEFT and shiftTo == RIGHT:
+            return False
+        if self.direction == RIGHT and shiftTo == LEFT:
+            return False
+        if self.direction == UP and shiftTo == DOWN:
+            return False
+        if self.direction == DOWN and shiftTo == UP:
+            return False
+        return True
 
     def eat(self):
         self.score += 1
         self.size = len(self.body)
 
-    def update(self, food):
+    def update(self):
         if self.direction == RIGHT: 
             self.head_pos[0] += self.speed
         if self.direction == LEFT:
@@ -28,11 +40,6 @@ class Snake:
         if self.direction == DOWN:
             self.head_pos[1] += self.speed
         self.body.insert(0, list(self.head_pos))
-        if food.posx == self.head_pos[0] and food.posy == self.head_pos[1]:
-            self.eat()
-            food = None
-        else:
-            self.body.pop()
         self.checkgameover()
 
     def checkgameover(self):
@@ -43,6 +50,8 @@ class Snake:
         for block in self.body[1 : ]:
             if self.head_pos[0] == block[0] and self.head_pos[1] == block[1]:
                 self.GAME_OVER = True
+        if self.GAME_OVER:
+            print('Game Over')
 
     def render(self, window):
         for snakeBit in self.body:
