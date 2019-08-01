@@ -50,8 +50,6 @@ class Snake:
         for block in self.body[1 : ]:
             if self.head_pos[0] == block[0] and self.head_pos[1] == block[1]:
                 self.GAME_OVER = True
-        if self.GAME_OVER:
-            print('Game Over')
 
     def render(self, window):
         for snakeBit in self.body:
